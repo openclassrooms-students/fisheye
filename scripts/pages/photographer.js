@@ -2,7 +2,7 @@
 import { BioPhotographerFactory } from "../factories/BioPhotographerFactory.js";
 import { fetchPhotographersData } from "../utils/fetchPhotographersData.js";
 import { contact } from "../utils/contactForm.js";
-
+import { dropdown } from "../templates/dropdown.js";
 
 const main = async () => {
 
@@ -16,6 +16,9 @@ const main = async () => {
      photographer.getBio(photographerUser);
 
     contact(photographerUser);
+
+    dropdown();
+    
 
 }
 

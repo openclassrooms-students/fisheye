@@ -5,9 +5,6 @@
   background-color: #f9f9f9;
   position: fixed;
   inset: 0;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
   display: none;
   width: 100%;
   background: rgba(196, 196, 196, 0.4);
@@ -52,7 +49,7 @@
 
 .envoyer-button {
   border-radius: 5px;
-  background: #901c1c;
+  background: $primary-color;
   border: 0;
   color: $white;
   text-align: center;

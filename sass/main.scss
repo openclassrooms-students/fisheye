@@ -12,12 +12,12 @@
 @import 'layout/footer';
 @import 'layout/sidebar';
 
+@import 'components/modal';
+@import 'components/form';
+@import 'components/dropdown';
 @import 'components/loader';
 @import 'components/buttons';
 @import 'components/cards';
-@import 'components/modal';
-@import 'components/form';
-
 
 @import 'pages/_photographers';
 @import 'pages/home';

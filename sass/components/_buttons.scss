@@ -10,5 +10,11 @@
   letter-spacing: 0em;
   text-align: center;
   border-radius: 5px;
-  border:0;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    background-color: $secondary-color;
+    color: $text-color;
+  }
 }

@@ -344,85 +344,6 @@ body {
   font-size: 3.6rem;
 }
 
-.photographer-bio__contact {
-  width: 170px;
-  height: 69px;
-  background-color: #901c1c;
-  color: white;
-  flex-shrink: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 26px;
-  letter-spacing: 0em;
-  text-align: center;
-  border-radius: 5px;
-  border: 0;
-}
-
-.photographer-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex: 0 0 26%;
-  margin-bottom: 8rem;
-}
-.photographer-card__link {
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: center;
-}
-.photographer-card__img {
-  width: 20rem;
-  height: 20rem;
-  object-fit: cover;
-  border-radius: 50%;
-}
-.photographer-card__name {
-  color: #d3573c;
-  font-size: 3.6rem;
-  margin: 2rem 0 0.5rem 0;
-  line-height: 46.87px;
-}
-
-.photographer-card__info {
-  text-align: center;
-  font-size: 13px;
-  font-weight: 400;
-}
-.photographer-card__info__location {
-  font-size: 1.3rem;
-  color: #901c1c;
-  margin: 0;
-}
-.photographer-card__info__tagline {
-  font-size: 1rem;
-  margin: 0.3rem 0;
-}
-.photographer-card__info__price {
-  color: #757575;
-  font-size: 0.9rem;
-}
-
-.photographer-bio__info__name {
-  color: #d3573c;
-  font-size: 6.4rem;
-  margin: 0;
-}
-.photographer-bio__info__location {
-  font-size: 2.4rem;
-  color: #901c1c;
-  margin: 0;
-}
-.photographer-bio__info__tagline {
-  font-size: 1.8rem;
-  margin: 2rem 0 0 0;
-}
-
 .modal {
   border-radius: 5px;
   background-color: #DB8876;
@@ -558,6 +479,174 @@ form input {
 .form-title h2 {
   font-size: 5.5rem;
   margin: 0;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  width: 170px;
+  background: #901c1c;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease-out;
+}
+
+.dropdown-wrapper.is-active {
+  border-radius: 5px 5px 0 0;
+  box-shadow: none;
+  border-bottom: none;
+  color: white;
+}
+
+.dropdown-wrapper.is-active .dropdown-list {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  max-height: 400px;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #901c1c;
+  border-radius: 0 0 5px 5px;
+  list-style: none;
+  transition: all 0.3s ease-out;
+  list-style-type: none;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-list li {
+  padding: 0 10px;
+}
+
+.dropdown-list li.selected {
+  display: none;
+}
+
+.dropdown-list a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 0;
+  transition: all 0.3s ease-out;
+  border-top: 1px solid white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  padding: 1.4rem;
+}
+
+.btn-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  background: transparent;
+  border: 0;
+  width: 100%;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  padding: 1rem;
+}
+.btn-dropdown span {
+  font-size: inherit;
+  margin-left: 1.4rem;
+}
+
+.dropdown-wrapper.is-active .btn-dropdown svg {
+  transform: rotate(180deg);
+}
+
+.photographer-bio__contact {
+  width: 170px;
+  height: 69px;
+  background-color: #901c1c;
+  color: white;
+  flex-shrink: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 5px;
+  border: 0;
+}
+.photographer-bio__contact:hover, .photographer-bio__contact:focus {
+  background-color: #d3573c;
+  color: black;
+}
+
+.photographer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex: 0 0 26%;
+  margin-bottom: 8rem;
+}
+.photographer-card__link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: center;
+}
+.photographer-card__img {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.photographer-card__name {
+  color: #d3573c;
+  font-size: 3.6rem;
+  margin: 2rem 0 0.5rem 0;
+  line-height: 46.87px;
+}
+
+.photographer-card__info {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+}
+.photographer-card__info__location {
+  font-size: 1.3rem;
+  color: #901c1c;
+  margin: 0;
+}
+.photographer-card__info__tagline {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+}
+.photographer-card__info__price {
+  color: #757575;
+  font-size: 0.9rem;
+}
+
+.photographer-bio__info__name {
+  color: #d3573c;
+  font-size: 6.4rem;
+  margin: 0;
+}
+.photographer-bio__info__location {
+  font-size: 2.4rem;
+  color: #901c1c;
+  margin: 0;
+}
+.photographer-bio__info__tagline {
+  font-size: 1.8rem;
+  margin: 2rem 0 0 0;
 }
 
 .hero-banner {
