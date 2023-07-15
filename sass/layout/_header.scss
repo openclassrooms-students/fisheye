@@ -1,5 +1,15 @@
-header {
+.header {
+  @include flex(row,space-between,center);
+  height: 90px;
+  margin: 0 10rem;
 
-  @include flex();
-    height: 90px;
+  &__logo {
+    width: 20rem;
+    object-fit: contain;
+  }
+
+  &__title {
+    color: $primary-color;
+    font-size: 3.6rem;
+  }
 }

@@ -85,17 +85,6 @@ body {
 
 
 
-
-h1 {
-    color: #901C1C;
-    margin-right: 100px;
-}
-
-.logo {
-    height: 50px;
-    margin-left: 100px;
-}
-
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

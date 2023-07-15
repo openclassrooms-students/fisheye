@@ -1,0 +1,4 @@
+.photographer_section {
+    margin-top: 10rem;
+  @include flex(row,space-between,center,wrap);
+}

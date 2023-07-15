@@ -1,5 +1,32 @@
-    async function getPhotographers() {
-        // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
+import { fetchPhotographersData } from "../utils/fetchPhotographersData.js";
+import { thumbPhotographerFactory } from "../factories/thumbPhotographerFactory.js";
+
+
+const main = async () => {
+    // Récupère les datas des photographes
+    const {photographers} = await fetchPhotographersData();
+    // Crée le wrapper des photographes
+    const thumbPhotographer = thumbPhotographerFactory(photographers);
+    const wrapper = thumbPhotographer.getWrapper(photographers);
+
+    console.log("wrapper", wrapper);
+    // Ajoute le wrapper au DOM
+    const main = document.querySelector("#main");
+    main.appendChild(wrapper);
+};
+
+
+
+main();
+
+
+
+//création de la classe PhotographerModel
+
+
+
+async function getPhotographers() {
+        // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet,
         // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
         let photographers = [
             {
@@ -41,6 +68,5 @@
         const { photographers } = await getPhotographers();
         displayData(photographers);
     }
-    
-    init();
-    
+
+    // init();

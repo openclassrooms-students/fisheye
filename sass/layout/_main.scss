@@ -5,4 +5,14 @@ html,
   scroll-behavior: smooth;
 }
 
+body{
+   font-family: "DM Sans",Arial, Helvetica, sans-serif;
+   color: $text-color;
+   font-weight: 400;
+}
 
+.container{
+  max-width:  calc(1440px - 7.2rem);
+  margin: auto;
+  padding: 0 7.2rem;
+}
