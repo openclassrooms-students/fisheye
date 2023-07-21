@@ -408,6 +408,7 @@ form input {
   display: none;
   width: 100%;
   background: rgba(196, 196, 196, 0.4);
+  z-index: 99;
 }
 
 .form-container.open {
@@ -451,7 +452,7 @@ form input {
   margin-top: 2rem;
 }
 
-.envoyer-button {
+.btn-submit {
   border-radius: 5px;
   background: #901c1c;
   border: 0;
@@ -490,6 +491,7 @@ form input {
   cursor: pointer;
   outline: none;
   transition: all 0.3s ease-out;
+  z-index: 2;
 }
 
 .dropdown-wrapper.is-active {
@@ -649,9 +651,65 @@ form input {
   margin: 2rem 0 0 0;
 }
 
+.card-media {
+  flex: 0 0 30%;
+  width: 350px;
+  height: 300px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.card-media__img {
+  border-radius: 5px;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.card-media__info {
+  color: #901c1c;
+  font-size: 2.4rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.card-media__info__desc {
+  margin: 0;
+  color: #901c1c;
+  font-size: 2.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-media__info__likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  border: none;
+  background-color: transparent;
+}
+
+.card-media__info__likes__number {
+  color: #901c1c;
+  font-size: 2.4rem;
+}
+.card-media__info__likes.is-liked svg path {
+  fill: transparent;
+  stroke: black;
+}
+
 .hero-banner {
-  background-color: #FAFAFA;
-  margin: 5.6rem 5rem;
+  background-color: #fafafa;
 }
 
 .bio-photographer {
@@ -660,6 +718,64 @@ form input {
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
+  border-radius: 5px;
+  background: #fafafa;
+  padding: 5.6rem 5rem;
+  margin-bottom: 8rem;
+}
+
+.media {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8rem;
+  flex-shrink: 0;
+}
+
+.sort {
+  display: flex;
+  margin-bottom: 5rem;
+}
+.sort__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-right: 1.2rem;
+}
+
+.total-likes-container {
+  padding: 2rem 2rem 1.5rem 2rem;
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 5rem;
+  background-color: #d3573c;
+}
+.total-likes-container .total-likes span,
+.total-likes-container .price {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin: 0;
+}
+.total-likes-container .total-likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.total-likes-container .total-likes svg {
+  margin-left: 0.6rem;
+}
+.total-likes-container .total-likes svg path {
+  fill: black;
 }
 
 .photographer_section {

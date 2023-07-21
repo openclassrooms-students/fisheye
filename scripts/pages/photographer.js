@@ -1,25 +1,12 @@
-//Mettre le code JavaScript lié à la page photographer.html
-import { BioPhotographerFactory } from "../factories/BioPhotographerFactory.js";
-import { fetchPhotographersData } from "../utils/fetchPhotographersData.js";
-import { contact } from "../utils/contactForm.js";
-import { dropdown } from "../templates/dropdown.js";
+import { mediaFactory } from "../factories/MediaFactory.js";
 
-const main = async () => {
+async function main() {
+  const mediaFactoryInstance = await mediaFactory();
 
-    const { photographers } = await fetchPhotographersData();
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-    const photographerUser = photographers.find((photographer) => photographer.id == id)
-
-    const photographer = BioPhotographerFactory(photographers);
-     photographer.getBio(photographerUser);
-
-    contact(photographerUser);
-
-    dropdown();
-    
-
+  mediaFactoryInstance.bioSection();
+  mediaFactoryInstance.contactForm();
+  mediaFactoryInstance.dropdown();
+  mediaFactoryInstance.mediaSection();
 }
 
 main();

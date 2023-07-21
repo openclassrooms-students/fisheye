@@ -25,99 +25,114 @@
         />
       </a>
     </header>
+
     <main id="main" class="container">
-      <div class="form-container" role="dialog" aria-labelledby="title">
-        <div class="form-wrapper">
-          <div class="form-title">
-            <h2 id="title">Contactez-moi name</h2>
-            <button class="form-close">
+      <!-- Bio Section  -->
+      <section class="bio-photographer"></section>
+
+      <!-- Media Section  -->
+      <section class="media-container">
+        <div class="sort">
+          <p class="sort__title">Trier par</p>
+          <div id="dropdown-wrapper" class="dropdown-wrapper" tabindex="1">
+            <button
+              class="btn-dropdown"
+              id="btn-dropdown"
+              data-sort="popularity"
+              role="menuitem"
+              type="button"
+              aria-labelledby="dropdown-title"
+              tabindex="1"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-controls="sort-dropdown"
+            >
+              <span id="dropdown-title">Popularité</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="72"
-                height="72"
-                viewBox="0 0 72 72"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
                 fill="none"
               >
-                <g clip-path="url(#clip0_159715_71)">
+                <g clip-path="url(#clip0_120_442)">
                   <path
-                    d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z"
+                    d="M9.88 20.5469L16 14.4402L22.12 20.5469L24 18.6669L16 10.6669L8 18.6669L9.88 20.5469Z"
                     fill="white"
                   />
                 </g>
                 <defs>
-                  <clipPath id="clip0_159715_71">
-                    <rect width="72" height="72" fill="white" />
+                  <clipPath id="clip0_120_442">
+                    <rect
+                      width="32"
+                      height="32"
+                      fill="white"
+                      transform="translate(32 32) rotate(-180)"
+                    />
                   </clipPath>
                 </defs>
               </svg>
             </button>
-          </div>
-          <form class="form-fields">
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" required />
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" required />
-            <label for="email">Email</label>
-            <input type="email" id="email" required />
-            <label for="message">Message</label>
-            <textarea id="message" required></textarea>
-          </form>
-          <div class="form-submit">
-            <button class="envoyer-button">Envoyer</button>
+            <ul class="dropdown-list" aria-hidden="true">
+              <li class="selected">
+                <a data-sort="popularity" href="#">Popularité</a>
+              </li>
+              <li><a data-sort="date" href="#">Date</a></li>
+              <li><a data-sort="title" href="#">Titre</a></li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div id="dropdown-wrapper" class="dropdown-wrapper" tabindex="1">
-        <button
-          class="btn-dropdown"
-           data-sort="popularity"
-          role="menuitem"
-          type="button"
-          aria-labelledby="dropdown-title"
-          tabindex="1"
-          aria-expanded="false"
-          aria-haspopup="listbox"
-          aria-controls="sort-dropdown"
-        >
-          <span id="dropdown-title">Popularité</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-          >
-            <g clip-path="url(#clip0_120_442)">
-              <path
-                d="M9.88 20.5469L16 14.4402L22.12 20.5469L24 18.6669L16 10.6669L8 18.6669L9.88 20.5469Z"
-                fill="white"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_120_442">
-                <rect
-                  width="32"
-                  height="32"
-                  fill="white"
-                  transform="translate(32 32) rotate(-180)"
-                />
-              </clipPath>
-            </defs>
-          </svg>
-        </button>
-        <ul class="dropdown-list">
-          <li class="selected"><a data-sort="popularity" href="#">Popularité</a></li>
-          <li><a data-sort="date" href="#">Date</a></li>
-          <li><a data-sort="title" href="#">Titre</a></li>
-        </ul>
-      </div>
+        <div class="media"></div>
+        <div class="total-likes-container"></div>
+      </section>
+
+      <!-- likes section  -->
+      <aside class="likes"></aside>
     </main>
 
-    <script>
-
-
-    </script>
+    <!-- modal Form -->
+    <div class="form-container" role="dialog" aria-labelledby="title">
+      <div class="form-wrapper">
+        <div class="form-title">
+          <h2 id="title">Contactez-moi name</h2>
+          <button class="form-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="72"
+              height="72"
+              viewBox="0 0 72 72"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_159715_71)">
+                <path
+                  d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z"
+                  fill="white"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_159715_71">
+                  <rect width="72" height="72" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
+        <form class="form-fields">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" required />
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" required />
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+          <label for="message">Message</label>
+          <textarea id="message" required></textarea>
+        </form>
+        <div class="form-submit">
+          <button class="btn-submit">Envoyer</button>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="/scripts/pages/photographer.js"></script>
   </body>

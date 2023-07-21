@@ -1,5 +1,4 @@
 export const contact = (photographer) => {
-
   const form = document.querySelector(".form-fields");
   const openFormButton = document.querySelector(".photographer-bio__contact");
   const formContainer = document.querySelector(".form-container");
@@ -7,6 +6,7 @@ export const contact = (photographer) => {
   const title = document.querySelector("#title");
 
   openFormButton.addEventListener("click", () => {
+  console.log("openFormButton", openFormButton);
     formContainer.classList.add("open");
     title.textContent = `Contactez-moi ${photographer.name}`;
   });
