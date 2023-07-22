@@ -1,23 +1,24 @@
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/placeholder';
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/placeholder";
 
-@import 'base/reset';
-@import 'base/typography';
+@import "base/reset";
+@import "base/typography";
 
-@import 'layout/main';
-@import 'layout/navigation';
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/sidebar';
+@import "layout/main";
+@import "layout/navigation";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/sidebar";
 
-@import 'components/modal';
-@import 'components/form';
-@import 'components/dropdown';
-@import 'components/loader';
-@import 'components/buttons';
-@import 'components/cards';
+@import "components/modal";
+@import "components/form";
+@import "components/dropdown";
+@import "components/loader";
+@import "components/buttons";
+@import "components/cards";
+@import "components/lightbox";
 
-@import 'pages/_photographers';
-@import 'pages/home';
+@import "pages/_photographers";
+@import "pages/home";

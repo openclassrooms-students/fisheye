@@ -1,4 +1,14 @@
-export const thumbPhotographerFactory = (photographers) => {
+import { fetchPhotographersData } from "../utils/fetchPhotographersData.js";
+
+export const home = async () => {
+  let data = {};
+
+  //  Récupère les données du photographe
+  try {
+    data = await fetchPhotographersData();
+  } catch (error) {
+    console.error(error);
+  }
 
   const getUserCard = (photographer) => {
     const { id, name, city, country, tagline, price, portrait } = photographer;
@@ -20,17 +30,23 @@ export const thumbPhotographerFactory = (photographers) => {
     return article;
   };
 
-  const getWrapper = (photographers) => {
+  const getWrapper = () => {
     const wrapper = document.createElement("section");
     wrapper.classList.add("photographer_section");
-    photographers.forEach((photographer) => {
+    data.photographers.forEach((photographer) => {
+      console.log("photographer", photographer);
       const userCard = getUserCard(photographer);
       wrapper.appendChild(userCard);
     });
     return wrapper;
   };
 
-  return {
-    getWrapper,
+  const init = () => {
+    console.log("photographers", data.photographers);
+    const wrapper = getWrapper();
+    document.querySelector("main").appendChild(wrapper);
   };
+
+  init();
+
 };

@@ -1,12 +1,12 @@
-import { mediaFactory } from "../factories/MediaFactory.js";
+import { photographer } from "../templates/photographer.js";
 
 async function main() {
-  const mediaFactoryInstance = await mediaFactory();
+  const photographerInstance = await photographer();
 
-  mediaFactoryInstance.bioSection();
-  mediaFactoryInstance.contactForm();
-  mediaFactoryInstance.dropdown();
-  mediaFactoryInstance.mediaSection();
+  photographerInstance.bioSection();
+  photographerInstance.contactForm();
+  photographerInstance.dropdown();
+  photographerInstance.mediaSection();
 }
 
 main();
