@@ -1,6 +1,7 @@
 import { fetchPhotographersData } from "../utils/fetchPhotographersData.js";
 import { filterUser, sortUserMedia } from "../utils/filterUserData.js";
 import { mediaFactory } from "../factories/mediaFactory.js";
+import { contactFormFactory } from "../factories/contactFormFactory.js";
 
 export const photographer = async () => {
   let data = {};
@@ -31,11 +32,30 @@ export const photographer = async () => {
     const { photographers } = data;
     const { name } = filterUser(photographers);
 
+    // Définition des messages d'erreur du formulaire
+    const messageInputError = {
+      msg: "Ce champ est obligatoire",
+      firstName: {
+        min: 2,
+        msg: "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
+      },
+      lastName: {
+        min: 2,
+        msg: "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+      },
+      email: {
+        msg: "Veuillez entrer une adresse email valide.",
+      },
+      message: {
+        min: 10,
+        msg: "Veuillez écrire votre message dans le champ.",
+      },
+    };
+
     const form = document.querySelector(".form-fields");
     const openFormButton = document.querySelector(".photographer-bio__contact");
     const formContainer = document.querySelector(".form-container");
     const formCloseButton = document.querySelector(".form-close");
-    const formSubmitButton = document.querySelector(".btn-submit");
     const title = document.querySelector("#title");
 
     openFormButton.addEventListener("click", () => {
@@ -45,21 +65,50 @@ export const photographer = async () => {
 
     formCloseButton.addEventListener("click", () => {
       formContainer.classList.remove("open");
+      form.reset();
     });
 
-    formSubmitButton.addEventListener("click", () => {
-      formContainer.classList.remove("open");
-    });
 
     // Gestion des événements clavier
     document.addEventListener("keydown", (event) => {
       if (event.code === "Escape") {
         formContainer.classList.remove("open");
+         form.reset();
       }
     });
 
+    form.addEventListener("input", (e) => {
+      const id = e.target.id;
+      contactFormFactory(id, messageInputError[id]);
+    });
+
     // log la valeur de l'input
-    form.addEventListener("input", (e) => console.log("value", e.target.value));
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // recuper les valeurs des inputs du formulaire
+      const elements = e.target.elements;
+
+      // parcoure les elements du formulaire
+      const values = Object.values(elements)
+        .slice(0, 4)
+        .map((element) =>
+          contactFormFactory(element.id, messageInputError[element.id])
+        );
+
+      const isValid = values.every((value) => value === true);
+
+      if (isValid) {
+        formContainer.classList.remove("open");
+        Object.values(elements)
+          .slice(0, 4)
+          .forEach((element) => {
+            console.log(element.id, element.value);
+          });
+
+        form.reset();
+      }
+    });
   };
 
   // Méthode pour afficher la biographie du photographe

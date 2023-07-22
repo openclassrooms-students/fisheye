@@ -119,18 +119,30 @@
           </button>
         </div>
         <form class="form-fields">
-          <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" required />
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" required />
-          <label for="email">Email</label>
-          <input type="email" id="email" required />
-          <label for="message">Message</label>
-          <textarea id="message" required></textarea>
+          <div class="formData">
+            <label for="firstName">Prénom</label>
+            <input type="text" id="firstName" />
+            <small></small>
+          </div>
+          <div class="formData">
+            <label for="lastName">Nom</label>
+            <input type="text" id="lastName" />
+            <small></small>
+          </div>
+          <div class="formData">
+            <label for="email">Email</label>
+            <input type="email" id="email" />
+            <small></small>
+          </div>
+          <div class="formData">
+            <label for="message">Message</label>
+            <textarea id="message"></textarea>
+            <small></small>
+          </div>
+          <div class="form-submit">
+            <button class="btn-submit">Envoyer</button>
+          </div>
         </form>
-        <div class="form-submit">
-          <button class="btn-submit">Envoyer</button>
-        </div>
       </div>
     </div>
 
