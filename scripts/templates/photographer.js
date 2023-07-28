@@ -66,12 +66,20 @@ export const photographer = async () => {
       formContainer.classList.add("open");
       formWrapper.ariaHidden = "false";
       title.textContent = `Contactez-moi ${name}`;
+      document.addEventListener("wheel", disableScroll, { passive: false });
+      document.addEventListener("keydown", handleTabKey);
     });
 
     formCloseButton.addEventListener("click", () => {
       formContainer.classList.remove("open");
       form.reset();
+      document.removeEventListener("wheel", disableScroll);
+      document.removeEventListener("keydown", handleTabKey);
     });
+
+    const disableScroll = (event) => {
+      event.preventDefault();
+    };
 
     // Gestion des événements clavier
     document.addEventListener("keydown", (event) => {
@@ -80,6 +88,24 @@ export const photographer = async () => {
         form.reset();
       }
     });
+
+    // Fonction pour gérer l'événement clavier et empêcher la navigation en dehors du formulaire
+    const handleTabKey = (event) => {
+      if (event.key === "Tab") {
+        const elementTarget = event.target;
+
+        const elements = form.elements;
+        const arrayElements = Array.from(elements);
+        arrayElements.unshift(formCloseButton);
+
+        if (!arrayElements.includes(elementTarget)) {
+          event.preventDefault();
+          arrayElements[0].focus(); // Mettre le focus sur le premier élément du tableau arrayElements
+        }
+      }
+    };
+
+    // form.addEventListener("keydown", handleTabKey);
 
     form.addEventListener("input", (e) => {
       const id = e.target.id;
@@ -174,19 +200,14 @@ export const photographer = async () => {
   // Méthode pour gérer le menu déroulant de tri des médias
   const dropdown = () => {
     const dropdownWrapper = document.querySelector("#dropdown-wrapper");
-    const dropdownLinks = document.querySelectorAll(".dropdown-list a");
+    const dropdownLinks = document.querySelectorAll(".dropdown-list button");
     const dropdownList = document.querySelector(".dropdown-list");
 
     // Sélection de l'élément span où afficher la valeur sélectionnée
     const selectedValueSpan = document.querySelector("#dropdown-title");
 
     // Gestion de l'événement clic sur le conteneur du dropdown
-    dropdownWrapper.addEventListener("click", function () {
-      this.classList.toggle("is-active");
-      const expanded = this.classList.contains("is-active");
-      dropdownWrapper.setAttribute("aria-expanded", expanded);
-      dropdownList.setAttribute("aria-hidden", !expanded);
-    });
+    dropdownWrapper.addEventListener("click", displayDropdown);
 
     // Gestion de l'événement clic sur chaque lien dans la liste déroulante
     dropdownLinks.forEach((link) => {
@@ -213,6 +234,13 @@ export const photographer = async () => {
         mediaSection();
       });
     });
+
+    function displayDropdown() {
+      dropdownWrapper.classList.toggle("is-active");
+      const expanded = this.classList.contains("is-active");
+      dropdownWrapper.setAttribute("aria-expanded", expanded);
+      dropdownList.setAttribute("aria-hidden", !expanded);
+    }
   };
 
   // Méthode pour calculer le nombre total de likes et mettre à jour le DOM
@@ -293,12 +321,11 @@ export const photographer = async () => {
     // Incrémenter ou décrémenter l'index du média actuel en fonction de la direction
     if (direction === "next" && currentMediaIndex < media.length - 1) {
       currentMediaIndex++;
-       showMedia(currentMediaIndex, media);
+      showMedia(currentMediaIndex, media);
     } else if (direction === "prev" && currentMediaIndex > 0) {
       currentMediaIndex--;
-       showMedia(currentMediaIndex, media);
+      showMedia(currentMediaIndex, media);
     }
-
   };
 
   // Méthode pour afficher les médias du photographe dans la page
@@ -318,7 +345,6 @@ export const photographer = async () => {
       link.href = "#";
       link.role = "button";
       link.ariaLabel = mediaCurrent.title;
-      link.tabIndex = "0";
 
       const footer = document.createElement("div");
       footer.classList.add("card-media__info");
@@ -341,61 +367,61 @@ export const photographer = async () => {
     const lightboxClose = document.querySelector(".lightbox__close");
     const lightboxNext = document.querySelector(".lightbox__next");
     const lightboxPrev = document.querySelector(".lightbox__prev");
+    const main = document.querySelector("#main");
 
     const mediaCurrentIndex = media.findIndex(
       (media) => media.id === parseInt(mediaCardCurrentElement.dataset.id)
     );
 
     lightbox.classList.add("open");
+    main.style.display = "none";
 
     showMedia(mediaCurrentIndex, media);
 
     lightboxClose.addEventListener("click", () => {
       lightbox.classList.remove("open");
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "Escape") {
-        lightbox.classList.remove("open");
-      }
+      main.style.display = "block";
     });
 
     lightboxNext.addEventListener("click", () => {
-      handleScrollMedia("next", media); // Appeler la fonction handleScrollMedia avec la direction "next"
+      handleScrollMedia("next", media);
     });
 
     lightboxPrev.addEventListener("click", () => {
-      handleScrollMedia("prev", media); // Appeler la fonction handleScrollMedia avec la direction "prev"
+      handleScrollMedia("prev", media);
     });
 
     // Gestion des événements clavier
     document.addEventListener("keydown", (event) => {
-      console.log("event.code", event.code);
-
       if (event.code === "ArrowRight") {
-        handleScrollMedia("next", media); // Appeler la fonction handleScrollMedia avec la direction "next"
+        handleScrollMedia("next", media);
       }
       if (event.code === "ArrowLeft") {
-        handleScrollMedia("prev", media); // Appeler la fonction handleScrollMedia avec la direction "prev"
+        handleScrollMedia("prev", media);
       }
-
       if (event.code === "Escape") {
         lightbox.classList.remove("open");
-      }
-
-      if (event.code === 13) {
-        console.log("enter");
-        lightbox.classList.add("open");
+        main.style.display = "block";
       }
     });
   };
   const handleClickMediacardImg = (media) => {
     const mediaCardImgAll = document.querySelectorAll(".card-media__media");
+    const mediaCardLinks = document.querySelectorAll(".card-media__link");
 
     mediaCardImgAll.forEach((mediaCardImg) => {
-      mediaCardImg.addEventListener("click", () =>
-        displayLightbox(media, mediaCardImg)
-      );
+      mediaCardImg.addEventListener("click", () => {
+        displayLightbox(media, mediaCardImg);
+      });
+    });
+
+    mediaCardLinks.forEach((mediaCardLink) => {
+      const mediaCardImg = mediaCardLink.querySelector(".card-media__media");
+      mediaCardLink.addEventListener("keydown", (event) => {
+        if (event.code === "Enter") {
+          displayLightbox(media, mediaCardImg);
+        }
+      });
     });
   };
   return {

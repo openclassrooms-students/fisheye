@@ -19,13 +19,11 @@
 .lightbox__prev,
 .lightbox__next,
 .lightbox__close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   border: none;
-  outline: none;
   cursor: pointer;
+  width:fit-content;
+  height: fit-content;
 }
 
 .lightbox__prev,
