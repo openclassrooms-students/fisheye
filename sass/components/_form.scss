@@ -42,7 +42,7 @@
 }
 .form-submit {
   text-align: left;
-  margin-top: 2rem;
+  margin-top: .5rem;
 }
 
 .btn-submit {
@@ -76,8 +76,9 @@
   color: red;
   font-size: 1.6rem;
   font-weight: 400;
+  margin-top: 1rem;
 }
 
 .input-error-border {
-  border: 2px solid red;
+  border: 3px solid red;
 }

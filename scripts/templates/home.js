@@ -17,8 +17,8 @@ export const home = async () => {
     article.classList.add("photographer-card");
 
     article.innerHTML = `
-        <a href="photographer.html?id=${id}" class="photographer-card__link" aria-label="lien vers la page de ${name}">
-            <img class="photographer-card__img" src="assets/photographers/photos/${portrait}" alt="photo de ${name}">
+        <a href="photographer.html?id=${id}" class="photographer-card__link" aria-label="${name}">
+            <img class="photographer-card__img" src="assets/photographers/photos/${portrait}" alt="Photo de profil de ${name}">
             <h2 class="photographer-card__name">${name}</h2>
         </a>
         <div class="photographer-card__info">
@@ -34,7 +34,6 @@ export const home = async () => {
     const wrapper = document.createElement("section");
     wrapper.classList.add("photographer_section");
     data.photographers.forEach((photographer) => {
-      console.log("photographer", photographer);
       const userCard = getUserCard(photographer);
       wrapper.appendChild(userCard);
     });
@@ -42,11 +41,9 @@ export const home = async () => {
   };
 
   const init = () => {
-    console.log("photographers", data.photographers);
     const wrapper = getWrapper();
     document.querySelector("main").appendChild(wrapper);
   };
 
   init();
-
 };

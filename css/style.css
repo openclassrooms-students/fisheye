@@ -387,12 +387,12 @@ form label {
   font-size: 36px;
 }
 
-form div {
+.formData {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
+  align-items: "self-start";
+  margin-bottom: 2rem;
 }
 
 form input {
@@ -450,7 +450,7 @@ form input {
 
 .form-submit {
   text-align: left;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 .btn-submit {
@@ -487,10 +487,11 @@ form input {
   color: red;
   font-size: 1.6rem;
   font-weight: 400;
+  margin-top: 1rem;
 }
 
 .input-error-border {
-  border: 2px solid red;
+  border: 3px solid red;
 }
 
 .dropdown-wrapper {
@@ -663,22 +664,21 @@ form input {
 }
 
 .card-media {
-  flex: 0 0 30%;
-  width: 350px;
-  height: 300px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
+  width: 35rem;
+  height: 30rem;
 }
-
-.card-media__img {
-  background: #c4c4c4;
-  border-radius: 5px;
+.card-media__link {
   width: 100%;
-  height: 80%;
+  height: 100%;
+}
+.card-media__link:hover .card-media__media {
+  transform: scale(1.1);
+}
+.card-media__media {
+  border-radius: 5px;
+  background: #c4c4c4;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
 }
 
@@ -699,6 +699,7 @@ form input {
   font-size: 2.4rem;
   white-space: nowrap;
   overflow: hidden;
+  padding-right: 1rem;
   text-overflow: ellipsis;
 }
 .card-media__info__likes {
@@ -715,75 +716,79 @@ form input {
   color: #901c1c;
   font-size: 2.4rem;
 }
-.card-media__info__likes.is-liked svg path {
-  fill: transparent;
-  stroke: black;
-}
 
 .lightbox {
   display: none;
   position: fixed;
   background: white;
-  z-index: 99;
-  width: 100%;
-  height: 100%;
+  z-index: 9999;
   inset: 0;
 }
 .lightbox.open {
   display: block;
 }
-.lightbox button {
-  background: transparent;
-  border: none;
+
+.lightbox-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .lightbox__prev,
 .lightbox__next,
 .lightbox__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  outline: none;
   cursor: pointer;
 }
 
 .lightbox__prev,
 .lightbox__next {
-  position: fixed;
+  position: absolute;
   top: 50%;
+  transform: translateY(-50%);
+}
+.lightbox__prev svg,
+.lightbox__next svg {
+  width: 8rem;
+  height: 8rem;
+}
+.lightbox__prev.disabled,
+.lightbox__next.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .lightbox__next {
-  right: 2%;
+  right: 1%;
 }
 
 .lightbox__prev {
-  left: 0;
+  left: 1%;
 }
 
 .lightbox__close {
-  position: fixed;
-  top: 4%;
-  right: 0;
+  position: absolute;
+  top: 6%;
+  right: 1.5%;
+}
+.lightbox__close svg {
+  width: 5rem;
+  height: 5rem;
 }
 
-.lightbox__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: nowrap;
-  height: 90vh;
-  margin: 5rem auto;
-}
-
-.lightbox__media {
-  border-radius: 5px;
-  background: #c4c4c4;
-  height: 100%;
+.lightbox__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
   width: 80%;
-}
-.lightbox__media video,
-.lightbox__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  margin: auto;
 }
 
 .lightbox__title {
@@ -812,11 +817,10 @@ form input {
 .media {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 8rem;
-  flex-shrink: 0;
+  gap: 8rem;
 }
 
 .sort {

@@ -55,11 +55,16 @@ export const photographer = async () => {
     const form = document.querySelector(".form-fields");
     const openFormButton = document.querySelector(".photographer-bio__contact");
     const formContainer = document.querySelector(".form-container");
+    const formWrapper = document.querySelector(".form-wrapper");
     const formCloseButton = document.querySelector(".form-close");
     const title = document.querySelector("#title");
 
+    formWrapper.ariaHidden = "true";
+    formWrapper.ariaLabelledby = `Contact me ${name}`;
+
     openFormButton.addEventListener("click", () => {
       formContainer.classList.add("open");
+      formWrapper.ariaHidden = "false";
       title.textContent = `Contactez-moi ${name}`;
     });
 
@@ -68,12 +73,11 @@ export const photographer = async () => {
       form.reset();
     });
 
-
     // Gestion des événements clavier
     document.addEventListener("keydown", (event) => {
       if (event.code === "Escape") {
         formContainer.classList.remove("open");
-         form.reset();
+        form.reset();
       }
     });
 
@@ -126,7 +130,7 @@ export const photographer = async () => {
             <p class="photographer-bio__info__location">${city}, ${country}</p>
             <p class="photographer-bio__info__tagline">${tagline}</p>
         </div>
-        <button class="photographer-bio__contact" aria-label="Contact Me" tabindex="-1">Contactez-moi</button>
+        <button class="photographer-bio__contact" aria-label="Contact Me">Contactez-moi</button>
         <img class="photographer-card__img" src="assets/photographers/photos/${portrait}" alt="photo de ${name}">
         `;
   };
@@ -142,7 +146,7 @@ export const photographer = async () => {
         // verifie si le bouton est like
 
         // Calculer la différence à ajouter ou soustraire au compteur de likes
-        const difference = button.classList.contains("is-liked") ? 1 : -1;
+        const difference = button.classList.contains("is-liked") ? -1 : 1;
 
         // Mettre à jour les classes CSS et le contenu du compteur de likes
         button.classList.toggle("is-liked");
@@ -236,65 +240,65 @@ export const photographer = async () => {
 
   // Méthode pour mettre à jour l'état des boutons "Next" et "Previous"
   const updateButtonState = (media) => {
-    const nextMediaBtn = document.querySelector(".lightbox__next");
-    const prevMediaBtn = document.querySelector(".lightbox__prev");
+    const lightboxNext = document.querySelector(".lightbox__next");
+    const lightboxPrev = document.querySelector(".lightbox__prev");
 
-    if (currentMediaIndex == 0) {
-    }
     // Vérifier si nous atteignons le début du tableau des médias
-    if (currentMediaIndex < 0 || currentMediaIndex === 0) {
-      currentMediaIndex = 0;
+    if (currentMediaIndex === 0) {
+      lightboxPrev.disabled = true;
+      lightboxPrev.classList.add("disabled");
 
-      prevMediaBtn.disabled = true;
-      prevMediaBtn.classList.add("hidden");
+      currentMediaIndex = 0;
     } else {
-      prevMediaBtn.disabled = false;
-      prevMediaBtn.classList.remove("hidden");
+      lightboxPrev.disabled = false;
+      lightboxPrev.classList.remove("disabled");
     }
 
     // Cacher le bouton "Next" s'il n'y a pas de média suivant ou si nous sommes sur le dernier média
-    if (
-      currentMediaIndex >= media.length - 1 ||
-      currentMediaIndex === media.length - 1
-    ) {
+    if (currentMediaIndex === media.length - 1) {
       currentMediaIndex = media.length - 1;
-      nextMediaBtn.disabled = true;
-      nextMediaBtn.classList.add("hidden");
+      lightboxNext.disabled = true;
+      lightboxNext.classList.add("disabled");
     } else {
-      nextMediaBtn.disabled = false;
-      nextMediaBtn.classList.remove("hidden");
+      lightboxNext.disabled = false;
+      lightboxNext.classList.remove("disabled");
     }
   };
 
   // Méthode pour afficher un média spécifique dans la lightbox
   const showMedia = (mediaIndex, media) => {
-    const lightboxMedia = document.querySelector(".lightbox__media");
-    const lightboxTitle = document.querySelector(".lightbox__title");
+    const lightboxMedia = document.querySelector(".lightbox__content");
 
-    // Vérifier si l'index est valide pour éviter les débordements du tableau
-    if (mediaIndex >= 0 && mediaIndex < media.length) {
+    if (currentMediaIndex >= 0 && currentMediaIndex <= media.length) {
+      updateButtonState(media);
       const currentMedia = media[mediaIndex];
-      lightboxMedia.setAttribute("data-id", currentMedia.id);
+      // Supprimer le contenu existant de la lightbox
       lightboxMedia.innerHTML = "";
 
-      lightboxMedia.appendChild(mediaFactory(currentMedia, true));
+      // Créer un élément HTML pour le média actuel et l'ajouter à la lightbox
+      const lightboxTitle = document.createElement("p");
+      lightboxTitle.classList.add("lightbox__title");
       lightboxTitle.textContent = currentMedia.title;
-    }
 
-    updateButtonState(media); // Mettre à jour l'état des boutons après avoir changé de média
+      lightboxMedia.appendChild(
+        mediaFactory(currentMedia, true, "Lilac breasted roller")
+      );
+
+      lightboxMedia.appendChild(lightboxTitle);
+    }
   };
 
   // Méthode pour gérer le défilement des médias dans la lightbox
   const handleScrollMedia = (direction, media) => {
     // Incrémenter ou décrémenter l'index du média actuel en fonction de la direction
-    if (direction === "next") {
+    if (direction === "next" && currentMediaIndex < media.length - 1) {
       currentMediaIndex++;
-    } else if (direction === "prev") {
+       showMedia(currentMediaIndex, media);
+    } else if (direction === "prev" && currentMediaIndex > 0) {
       currentMediaIndex--;
+       showMedia(currentMediaIndex, media);
     }
 
-    showMedia(currentMediaIndex, media);
-    updateButtonState(media); // Mettre à jour l'état des boutons après avoir changé de média
   };
 
   // Méthode pour afficher les médias du photographe dans la page
@@ -305,62 +309,95 @@ export const photographer = async () => {
 
     mediaSection.innerHTML = "";
 
-    media.forEach((mediaCurrent, mediaCurrentIndex) => {
-      const wrapper = document.createElement("figure");
-
-      const lightbox = document.querySelector(".lightbox");
-      const lightboxMedia = document.querySelector(".lightbox__media");
-      const lightboxTitle = document.querySelector(".lightbox__title");
-      const lightboxClose = document.querySelector(".lightbox__close");
-
+    media.forEach((mediaCurrent) => {
+      const wrapper = document.createElement("div");
       wrapper.classList.add("card-media");
-      wrapper.setAttribute("data-id", mediaCurrent.id);
 
-      const figcaption = document.createElement("figcaption");
-      figcaption.classList.add("card-media__info");
-      figcaption.innerHTML = infoCard(mediaCurrent);
+      const link = document.createElement("a");
+      link.classList.add("card-media__link");
+      link.href = "#";
+      link.role = "button";
+      link.ariaLabel = mediaCurrent.title;
+      link.tabIndex = "0";
 
-      // lightbox
-      wrapper.addEventListener("click", () => {
-        lightbox.classList.add("open");
-        lightboxMedia.innerHTML = "";
+      const footer = document.createElement("div");
+      footer.classList.add("card-media__info");
+      footer.innerHTML = infoCard(mediaCurrent);
 
-        lightboxMedia.setAttribute("data-id", mediaCurrent.id);
-        lightboxMedia.appendChild(mediaFactory(mediaCurrent, true));
-        lightboxTitle.textContent = mediaCurrent.title;
-        currentMediaIndex = mediaCurrentIndex;
-        updateButtonState(media); // Mettre à jour l'état des boutons après avoir changé de média
-
-        lightboxClose.addEventListener("click", () => {
-          lightbox.classList.remove("open");
-        });
-
-        document.addEventListener("keydown", (event) => {
-          if (event.code === "Escape") {
-            lightbox.classList.remove("open");
-          }
-        });
-      });
-
-      wrapper.appendChild(mediaFactory(mediaCurrent));
-      wrapper.appendChild(figcaption);
+      link.appendChild(mediaFactory(mediaCurrent));
+      wrapper.appendChild(link);
+      wrapper.appendChild(footer);
       mediaSection.appendChild(wrapper);
     });
 
     likeButton(); // les gestionnaires d'événements pour les nouveaux boutons "like".
     counterLikes(); // Mettre à jour le nombre total de likes
 
-    const nextMediaBtn = document.querySelector(".lightbox__next");
-    nextMediaBtn.addEventListener("click", () => {
+    handleClickMediacardImg(media); // Gestionnaire d'événements pour les images de la carte média
+  };
+
+  const displayLightbox = (media, mediaCardCurrentElement) => {
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxClose = document.querySelector(".lightbox__close");
+    const lightboxNext = document.querySelector(".lightbox__next");
+    const lightboxPrev = document.querySelector(".lightbox__prev");
+
+    const mediaCurrentIndex = media.findIndex(
+      (media) => media.id === parseInt(mediaCardCurrentElement.dataset.id)
+    );
+
+    lightbox.classList.add("open");
+
+    showMedia(mediaCurrentIndex, media);
+
+    lightboxClose.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "Escape") {
+        lightbox.classList.remove("open");
+      }
+    });
+
+    lightboxNext.addEventListener("click", () => {
       handleScrollMedia("next", media); // Appeler la fonction handleScrollMedia avec la direction "next"
     });
 
-    const prevMediaBtn = document.querySelector(".lightbox__prev");
-    prevMediaBtn.addEventListener("click", () => {
+    lightboxPrev.addEventListener("click", () => {
       handleScrollMedia("prev", media); // Appeler la fonction handleScrollMedia avec la direction "prev"
     });
-  };
 
+    // Gestion des événements clavier
+    document.addEventListener("keydown", (event) => {
+      console.log("event.code", event.code);
+
+      if (event.code === "ArrowRight") {
+        handleScrollMedia("next", media); // Appeler la fonction handleScrollMedia avec la direction "next"
+      }
+      if (event.code === "ArrowLeft") {
+        handleScrollMedia("prev", media); // Appeler la fonction handleScrollMedia avec la direction "prev"
+      }
+
+      if (event.code === "Escape") {
+        lightbox.classList.remove("open");
+      }
+
+      if (event.code === 13) {
+        console.log("enter");
+        lightbox.classList.add("open");
+      }
+    });
+  };
+  const handleClickMediacardImg = (media) => {
+    const mediaCardImgAll = document.querySelectorAll(".card-media__media");
+
+    mediaCardImgAll.forEach((mediaCardImg) => {
+      mediaCardImg.addEventListener("click", () =>
+        displayLightbox(media, mediaCardImg)
+      );
+    });
+  };
   return {
     bioSection,
     contactForm,

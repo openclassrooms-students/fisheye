@@ -34,7 +34,7 @@
       <section class="media-container">
         <div class="sort">
           <p class="sort__title">Trier par</p>
-          <div id="dropdown-wrapper" class="dropdown-wrapper" tabindex="1">
+          <div id="dropdown-wrapper" class="dropdown-wrapper">
             <button
               class="btn-dropdown"
               id="btn-dropdown"
@@ -42,7 +42,6 @@
               role="menuitem"
               type="button"
               aria-labelledby="dropdown-title"
-              tabindex="1"
               aria-expanded="false"
               aria-haspopup="listbox"
               aria-controls="sort-dropdown"
@@ -75,10 +74,10 @@
             </button>
             <ul class="dropdown-list" aria-hidden="true">
               <li class="selected">
-                <a data-sort="popularity" href="#">Popularité</a>
+                <button data-sort="popularity">Popularité</button>
               </li>
-              <li><a data-sort="date" href="#">Date</a></li>
-              <li><a data-sort="title" href="#">Titre</a></li>
+              <li><button data-sort="date">Date</button></li>
+              <li><button data-sort="title">Titre</button></li>
             </ul>
           </div>
         </div>
@@ -96,7 +95,7 @@
       <div class="form-wrapper">
         <div class="form-title">
           <h2 id="title">Contactez-moi name</h2>
-          <button class="form-close">
+          <button class="form-close" aria-label="Close Contact form">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="72"
@@ -121,26 +120,26 @@
         <form class="form-fields">
           <div class="formData">
             <label for="firstName">Prénom</label>
-            <input type="text" id="firstName" />
+            <input type="text" id="firstName" aria-label="First name" />
             <small></small>
           </div>
           <div class="formData">
             <label for="lastName">Nom</label>
-            <input type="text" id="lastName" />
+            <input type="text" id="lastName" aria-label="Last name" />
             <small></small>
           </div>
           <div class="formData">
             <label for="email">Email</label>
-            <input type="email" id="email" />
+            <input type="email" id="email" aria-label="Email" />
             <small></small>
           </div>
           <div class="formData">
             <label for="message">Message</label>
-            <textarea id="message"></textarea>
+            <textarea id="message" aria-label="Your message"></textarea>
             <small></small>
           </div>
           <div class="form-submit">
-            <button class="btn-submit">Envoyer</button>
+            <button class="btn-submit" aria-label="Send">Envoyer</button>
           </div>
         </form>
       </div>
@@ -148,89 +147,92 @@
 
     <!-- lightbox -->
     <div class="lightbox">
-      <button class="lightbox__close">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="72"
-          height="72"
-          viewBox="0 0 72 72"
-          fill="none"
-        >
-          <g clip-path="url(#clip0_120_794)">
-            <path
-              d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z"
-              fill="#911C1C"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_120_794">
-              <rect width="72" height="72" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
-      </button>
-      <button class="lightbox__next">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="96"
-          height="96"
-          viewBox="0 0 96 96"
-          fill="none"
-        >
-          <g clip-path="url(#clip0_120_803)">
-            <path
-              d="M34.3601 29.64L52.6801 48L34.3601 66.36L40.0001 72L64.0001 48L40.0001 24L34.3601 29.64Z"
-              fill="#911C1C"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_120_803">
-              <rect
-                width="96"
-                height="96"
-                fill="white"
-                transform="translate(0 96) rotate(-90)"
+      <div class="lightbox-container">
+        <button class="lightbox__close" aria-label="Close dialog" tabindex="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="72"
+            height="72"
+            viewBox="0 0 72 72"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_120_794)">
+              <path
+                d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z"
+                fill="#911C1C"
               />
-            </clipPath>
-          </defs>
-        </svg>
-      </button>
-      <button class="lightbox__prev">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="96"
-          height="96"
-          viewBox="0 0 96 96"
-          fill="none"
-        >
-          <g clip-path="url(#clip0_120_800)">
-            <path
-              d="M61.6399 66.36L43.3199 48L61.6399 29.64L55.9999 24L31.9999 48L55.9999 72L61.6399 66.36Z"
-              fill="#911C1C"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_120_800">
-              <rect
-                width="96"
-                height="96"
-                fill="white"
-                transform="translate(96) rotate(90)"
+            </g>
+            <defs>
+              <clipPath id="clip0_120_794">
+                <rect width="72" height="72" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+        </button>
+        <button class="lightbox__next" aria-label="Next image" tabindex="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="96"
+            height="96"
+            viewBox="0 0 96 96"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_120_803)">
+              <path
+                d="M34.3601 29.64L52.6801 48L34.3601 66.36L40.0001 72L64.0001 48L40.0001 24L34.3601 29.64Z"
+                fill="#911C1C"
               />
-            </clipPath>
-          </defs>
-        </svg>
-      </button>
-      <div class="lightbox__container">
-        <div class="lightbox__media">
-          <img
-            class="lightbox__media"
-            src="assets/photographers/Ellie-Rose/Architecture_Connected_Curves.jpg"
-            alt="photographers/Ellie-Rose"
-          />
-        </div>
+            </g>
+            <defs>
+              <clipPath id="clip0_120_803">
+                <rect
+                  width="96"
+                  height="96"
+                  fill="white"
+                  transform="translate(0 96) rotate(-90)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+        </button>
+        <button class="lightbox__prev" aria-label="Previous image" tabindex="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="96"
+            height="96"
+            viewBox="0 0 96 96"
+            fill="none"
+          >
+            <g clip-path="url(#clip0_120_800)">
+              <path
+                d="M61.6399 66.36L43.3199 48L61.6399 29.64L55.9999 24L31.9999 48L55.9999 72L61.6399 66.36Z"
+                fill="#911C1C"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_120_800">
+                <rect
+                  width="96"
+                  height="96"
+                  fill="white"
+                  transform="translate(96) rotate(90)"
+                />
+              </clipPath>
+            </defs>
+          </svg>
+        </button>
+        <div class="lightbox__content" aria-label="image closeup view">
+          <a class="card-media__link">
+            <img
+              class="card-media__media"
+              aria-label="Lilac breasted roller"
+              src="assets/photographers/Ellie-Rose/Architecture_Connected_Curves.jpg"
+              alt="photographers/Ellie-Rose"
+            />
+          </a>
 
-        <p class="lightbox__title">Arc-en-ciel</p>
+          <p class="lightbox__title">Arc-en-ciel</p>
+        </div>
       </div>
     </div>
 

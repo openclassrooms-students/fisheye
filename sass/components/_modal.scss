@@ -38,12 +38,12 @@ form label {
     font-size: 36px;
 }
 
-form div {
+.formData{
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+    align-items: "self-start";
+    margin-bottom: 2rem;
 }
 
 form input {
