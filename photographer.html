@@ -27,7 +27,7 @@
     </header>
 
     <!-- modal Form -->
-    <div class="form-container" role="dialog" aria-labelledby="title">
+    <div class="form-container" role="dialog" aria-labelledby="title" aria-hidden="true">
       <div class="form-wrapper">
         <div class="form-title">
           <h2 id="title">Contactez-moi name</h2>
@@ -217,12 +217,12 @@
                 </defs>
               </svg>
             </button>
-            <ul class="dropdown-list" aria-hidden="true">
+            <ul class="dropdown-list" aria-hidden="true" role="listbox">
               <li class="selected">
-                <button data-sort="popularity">Popularité</button>
+                <button data-sort="popularity" tabindex="-1">Popularité</button>
               </li>
-              <li><button data-sort="date">Date</button></li>
-              <li><button data-sort="title">Titre</button></li>
+              <li><button data-sort="date" tabindex="-1">Date</button></li>
+              <li><button data-sort="title" tabindex="-1">Titre</button></li>
             </ul>
           </div>
         </div>

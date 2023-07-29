@@ -2,23 +2,12 @@ import { fetchPhotographersData } from "../utils/fetchPhotographersData.js";
 import { filterUser, sortUserMedia } from "../utils/filterUserData.js";
 import { mediaFactory } from "../factories/mediaFactory.js";
 import { contactFormFactory } from "../factories/contactFormFactory.js";
+import heartSvg from "./heartSvg.js";
 
 export const photographer = async () => {
   let data = {};
   let currentSort = "popularity";
   let currentMediaIndex = 0;
-
-  const heartSvg = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
-            <g clip-path="url(#clip0_120_561)">
-                <path d="M10.5 21.35L9.23125 20.03C4.725 15.36 1.75 12.28 1.75 8.5C1.75 5.42 3.8675 3 6.5625 3C8.085 3 9.54625 3.81 10.5 5.09C11.4537 3.81 12.915 3 14.4375 3C17.1325 3 19.25 5.42 19.25 8.5C19.25 12.28 16.275 15.36 11.7688 20.04L10.5 21.35Z" fill="#911C1C"/>
-            </g>
-            <defs>
-                <clipPath id="clip0_120_561">
-                <rect width="21" height="24" fill="white"/>
-                </clipPath>
-            </defs>
-      </svg>`;
 
   //  Récupère les données du photographe
   try {
@@ -59,36 +48,6 @@ export const photographer = async () => {
     const formCloseButton = document.querySelector(".form-close");
     const title = document.querySelector("#title");
 
-    formWrapper.ariaHidden = "true";
-    formWrapper.ariaLabelledby = `Contact me ${name}`;
-
-    openFormButton.addEventListener("click", () => {
-      formContainer.classList.add("open");
-      formWrapper.ariaHidden = "false";
-      title.textContent = `Contactez-moi ${name}`;
-      document.addEventListener("wheel", disableScroll, { passive: false });
-      document.addEventListener("keydown", handleTabKey);
-    });
-
-    formCloseButton.addEventListener("click", () => {
-      formContainer.classList.remove("open");
-      form.reset();
-      document.removeEventListener("wheel", disableScroll);
-      document.removeEventListener("keydown", handleTabKey);
-    });
-
-    const disableScroll = (event) => {
-      event.preventDefault();
-    };
-
-    // Gestion des événements clavier
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "Escape") {
-        formContainer.classList.remove("open");
-        form.reset();
-      }
-    });
-
     // Fonction pour gérer l'événement clavier et empêcher la navigation en dehors du formulaire
     const handleTabKey = (event) => {
       if (event.key === "Tab") {
@@ -105,14 +64,45 @@ export const photographer = async () => {
       }
     };
 
-    // form.addEventListener("keydown", handleTabKey);
+    // Fonction pour empêcher le défilement de la page lorsque le formulaire est ouvert
+    const disableScroll = (event) => {
+      event.preventDefault();
+    };
 
+    const handleDisplayForm = () => {
+      formContainer.classList.add("open");
+      formContainer.ariaHidden = "false";
+      formWrapper.ariaLabelledby = `Contact me ${name}`;
+      title.textContent = `Contactez-moi ${name}`;
+      document.addEventListener("wheel", disableScroll, { passive: false });
+      document.addEventListener("keydown", handleTabKey);
+    };
+
+    const handleClosingForm = () => {
+      formContainer.classList.remove("open");
+      form.reset();
+      document.removeEventListener("wheel", disableScroll);
+      document.removeEventListener("keydown", handleTabKey);
+    };
+
+    // Gestion des événements clic
+    openFormButton.addEventListener("click", handleDisplayForm);
+    formCloseButton.addEventListener("click", handleClosingForm);
+
+    // Gestion des événements clavier
+    formContainer.addEventListener("keydown", (event) => {
+      if (event.code === "Escape") {
+        formContainer.classList.remove("open");
+        form.reset();
+      }
+    });
+
+    // Gestion des événements de saisie
     form.addEventListener("input", (e) => {
       const id = e.target.id;
       contactFormFactory(id, messageInputError[id]);
     });
 
-    // log la valeur de l'input
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -240,6 +230,10 @@ export const photographer = async () => {
       const expanded = this.classList.contains("is-active");
       dropdownWrapper.setAttribute("aria-expanded", expanded);
       dropdownList.setAttribute("aria-hidden", !expanded);
+      // mettre à jour l'attribut tabindex des buttons dans la liste déroulante
+      dropdownLinks.forEach((link) => {
+        link.tabIndex = expanded ? 0 : -1;
+      });
     }
   };
 
