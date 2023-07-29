@@ -3,7 +3,7 @@
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="icon" type="image/png" href="./assets/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
@@ -19,7 +19,7 @@
         aria-label="Fisheye Home page"
       >
         <img
-          src="assets/images/logo.png"
+          src="./assets/images/logo.png"
           class="header__logo"
           alt="Fisheye Logo"
         />
@@ -27,7 +27,12 @@
     </header>
 
     <!-- modal Form -->
-    <div class="form-container" role="dialog" aria-labelledby="title" aria-hidden="true">
+    <div
+      class="form-container"
+      role="dialog"
+      aria-labelledby="title"
+      aria-hidden="true"
+    >
       <div class="form-wrapper">
         <div class="form-title">
           <h2 id="title">Contactez-moi name</h2>
@@ -84,7 +89,7 @@
     <!-- lightbox -->
     <div class="lightbox">
       <div class="lightbox-container">
-        <button class="lightbox__close" aria-label="Close dialog"  tabindex="0">
+        <button class="lightbox__close" aria-label="Close dialog" tabindex="0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="72"
@@ -105,7 +110,7 @@
             </defs>
           </svg>
         </button>
-        <button class="lightbox__next" aria-label="Next image"  tabindex="0">
+        <button class="lightbox__next" aria-label="Next image" tabindex="0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="96"
@@ -131,7 +136,7 @@
             </defs>
           </svg>
         </button>
-        <button class="lightbox__prev" aria-label="Previous image"  tabindex="0">
+        <button class="lightbox__prev" aria-label="Previous image" tabindex="0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="96"
@@ -162,7 +167,7 @@
             <img
               class="card-media__media"
               aria-label="Lilac breasted roller"
-              src="assets/photographers/Ellie-Rose/Architecture_Connected_Curves.jpg"
+              src="./assets/photographers/Ellie-Rose/Architecture_Connected_Curves.jpg"
               alt="photographers/Ellie-Rose"
             />
           </a>
@@ -219,10 +224,35 @@
             </button>
             <ul class="dropdown-list" aria-hidden="true" role="listbox">
               <li class="selected">
-                <button id="popularity" data-sort="popularity" aria-selected="true" tabindex="-1">Popularité</button>
+                <button
+                  id="popularity"
+                  data-sort="popularity"
+                  aria-selected="true"
+                  tabindex="-1"
+                >
+                  Popularité
+                </button>
               </li>
-              <li><button id="date" data-sort="date" aria-selected="false" tabindex="-1">Date</button></li>
-              <li><button id="title" data-sort="title" aria-selected="false" tabindex="-1">Titre</button></li>
+              <li>
+                <button
+                  id="date"
+                  data-sort="date"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  Date
+                </button>
+              </li>
+              <li>
+                <button
+                  id="title"
+                  data-sort="title"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  Titre
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -235,6 +265,6 @@
       <aside class="likes"></aside>
     </main>
 
-    <script type="module" src="/scripts/pages/photographer.js"></script>
+    <script type="module" src="./scripts/pages/photographer.js"></script>
   </body>
 </html>

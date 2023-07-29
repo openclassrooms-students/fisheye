@@ -13,7 +13,7 @@ const bioSection = (photographers) => {
             <p class="photographer-bio__info__tagline">${tagline}</p>
         </div>
         <button class="photographer-bio__contact" aria-label="Contact Me">Contactez-moi</button>
-        <img class="photographer-card__img" src="assets/photographers/photos/${portrait}" alt="photo de ${name}">
+        <img class="photographer-card__img" src="./assets/photographers/photos/${portrait}" alt="photo de ${name}">
         `;
 };
 

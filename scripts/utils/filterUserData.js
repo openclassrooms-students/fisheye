@@ -17,8 +17,8 @@ export const sortUserMedia = (
     const firstName = user.name.split(" ")[0];
 
     const src = image
-      ? `assets/photographers/${firstName}/${image}`
-      : `assets/photographers/${firstName}/${video}`;
+      ? `./assets/photographers/${firstName}/${image}`
+      : `./assets/photographers/${firstName}/${video}`;
 
     const type = image ? "img" : "video";
 
