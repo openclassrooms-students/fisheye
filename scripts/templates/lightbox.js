@@ -99,7 +99,7 @@ const displayLightbox = (media, mediaCardCurrentElement) => {
 
   lightboxClose.addEventListener("click", () => {
     lightbox.classList.remove("open");
-   removeEventListener()
+    removeEventListener();
   });
 
   lightboxNext.addEventListener("click", () => {
@@ -122,12 +122,12 @@ const displayLightbox = (media, mediaCardCurrentElement) => {
     }
     if (event.code === "Escape") {
       lightbox.classList.remove("open");
-      removeEventListener()
+      removeEventListener();
     }
   });
 
- document.addEventListener("wheel", disableScroll, { passive: false });
- document.addEventListener("keydown", handleTabKey);
+  document.addEventListener("wheel", disableScroll, { passive: false });
+  document.addEventListener("keydown", handleTabKey);
 };
 
 const lightbox = (media) => {
