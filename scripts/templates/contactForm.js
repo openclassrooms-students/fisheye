@@ -1,6 +1,9 @@
-import { contactFormFactory } from "../factories/contactFormFactory";
+import { contactFormFactory } from "../factories/contactFormFactory.js";
+import { filterUser } from "../utils/filterUserData.js";
 
-const contactForm = (photographerName) => {
+const contactForm = (photographers) => {
+  const { name: photographerName } = filterUser(photographers);
+
   // Définition des messages d'erreur du formulaire
   const messageInputError = {
     msg: "Ce champ est obligatoire",
@@ -49,6 +52,11 @@ const contactForm = (photographerName) => {
     event.preventDefault();
   };
 
+  const removeEventListener = () => {
+    document.removeEventListener("wheel", disableScroll);
+    document.removeEventListener("keydown", handleTabKey);
+  };
+
   const handleDisplayForm = () => {
     formContainer.classList.add("open");
     formContainer.ariaHidden = "false";
@@ -61,8 +69,7 @@ const contactForm = (photographerName) => {
   const handleClosingForm = () => {
     formContainer.classList.remove("open");
     form.reset();
-    document.removeEventListener("wheel", disableScroll);
-    document.removeEventListener("keydown", handleTabKey);
+    removeEventListener();
   };
 
   // Gestion des événements clic
@@ -70,10 +77,11 @@ const contactForm = (photographerName) => {
   formCloseButton.addEventListener("click", handleClosingForm);
 
   // Gestion des événements clavier
-  formContainer.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", (event) => {
     if (event.code === "Escape") {
       formContainer.classList.remove("open");
       form.reset();
+      removeEventListener();
     }
   });
 
@@ -107,6 +115,7 @@ const contactForm = (photographerName) => {
         });
 
       form.reset();
+      removeEventListener();
     }
   });
 };

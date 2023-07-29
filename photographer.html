@@ -189,7 +189,7 @@
               aria-labelledby="dropdown-title"
               aria-expanded="false"
               aria-haspopup="listbox"
-              aria-controls="sort-dropdown"
+              aria-activedescendant="popularity"
             >
               <span id="dropdown-title">Popularité</span>
               <svg
@@ -219,10 +219,10 @@
             </button>
             <ul class="dropdown-list" aria-hidden="true" role="listbox">
               <li class="selected">
-                <button data-sort="popularity" tabindex="-1">Popularité</button>
+                <button id="popularity" data-sort="popularity" aria-selected="true" tabindex="-1">Popularité</button>
               </li>
-              <li><button data-sort="date" tabindex="-1">Date</button></li>
-              <li><button data-sort="title" tabindex="-1">Titre</button></li>
+              <li><button id="date" data-sort="date" aria-selected="false" tabindex="-1">Date</button></li>
+              <li><button id="title" data-sort="title" aria-selected="false" tabindex="-1">Titre</button></li>
             </ul>
           </div>
         </div>

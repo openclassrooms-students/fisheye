@@ -680,9 +680,6 @@ form input {
   width: 100%;
   height: 100%;
 }
-.card-media__link:hover .card-media__media {
-  transform: scale(1.1);
-}
 .card-media__media {
   border-radius: 5px;
   background: #c4c4c4;
