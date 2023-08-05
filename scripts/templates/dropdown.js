@@ -38,7 +38,7 @@ const dropdown = (data, currentSort) => {
         selectedValueSpan.innerHTML = event.currentTarget.textContent;
         const button = selectedValueSpan.parentElement;
         button.setAttribute("data-sort", currentSort);
-        button.setAttribute("aria-activedescendant", link.id);
+
       // Ajout de la classe "selected" au parent de l'élément lien cliqué
         this.parentElement.classList.add("selected");
         this.setAttribute("aria-selected", true);

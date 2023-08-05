@@ -29,7 +29,7 @@ const contactForm = (photographers) => {
   const formContainer = document.querySelector(".form-container");
   const formWrapper = document.querySelector(".form-wrapper");
   const formCloseButton = document.querySelector(".form-close");
-  const title = document.querySelector("#title");
+  const title = document.querySelector("#title-contact");
 
   // Fonction pour gérer l'événement clavier et empêcher la navigation en dehors du formulaire
   const handleTabKey = (event) => {

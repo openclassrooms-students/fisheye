@@ -5,7 +5,7 @@
 
   &__link {
     text-decoration: none;
-    @include flex(column, center, center, center);
+    @include flex(column, center, center);
   }
 
   &__img {
